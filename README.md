@@ -54,13 +54,9 @@ If your database is on a different host than the servers using your postgres con
 
 ```
 postgres_allowed_hosts:
-    # What list of IPs are allowed to connect?
-    # OPTIONAL: Defaults to [] (only localhost can connect).
-  - hosts: []
-
-    # What network interface should be used?
-    # OPTIONAL: Defaults to eth0.
-    interface: "eth0"
+    # What address are allowed to connect?
+    # OPTIONAL: Defaults to '' (only localhost can connect).
+  - address: '0.0.0.0/0'
 
     # How is the connection to the server made?
     # OPTIONAL: Defaults to host.
@@ -105,10 +101,10 @@ postgres_log_destination: syslog
 
 # If you wanted to add multiple groups or servers...
 postgres_allowed_hosts:
-  - hosts: "{{ groups['my_rails_apps'] }}"
-  - hosts: "{{ groups['my_golang_apps'] }}"
+  - address: "{{ groups['my_rails_apps'] }}"
+  - address: "{{ groups['my_golang_apps'] }}"
     interface: "eth1"
-  - hosts: ["www.sometrustworthy.com"]
+  - address: "www.sometrustworthy.com"
     auth: "trust"
 ```
 
