@@ -4,6 +4,7 @@ postgres_listen_addresses:
 postgres_port: 5432
 postgres_username: deploy
 postgres_password: pleasedonthackme
+postgres_version: "9.4"
 
 postgres_log_destination: stderr
 postgres_syslog_facility: LOCAL0

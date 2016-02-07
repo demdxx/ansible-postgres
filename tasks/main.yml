@@ -12,17 +12,17 @@
   apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_lsb.codename }}-pgdg main'
 
 - name: ensure postgres is installed
-  apt: pkg=postgresql-9.3 state=latest update_cache=true cache_valid_time={{ apt_cache_valid_time }}
+  apt: pkg=postgresql-{{ postgres_version }} state=latest update_cache=true cache_valid_time={{ apt_cache_valid_time }}
   notify:
     - restart postgres
 
 - name: ensure postgres' pg_hba is configured
-  template: src=pg_hba.conf.j2 dest=/etc/postgresql/9.3/main/pg_hba.conf
+  template: src=pg_hba.conf.j2 dest=/etc/postgresql/{{ postgres_version }}/main/pg_hba.conf
   notify:
     - restart postgres
 
 - name: ensure postgres is configured
-  template: src=postgresql.conf.j2 dest=/etc/postgresql/9.3/main/postgresql.conf
+  template: src=postgresql.conf.j2 dest=/etc/postgresql/{{ postgres_version }}/main/postgresql.conf
   notify:
     - restart postgres
 
